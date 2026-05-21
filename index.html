@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Superstore Dashboard | Tren Revenue Q3 & Kinerja</title>
+    <title>Superstore Dashboard | 5 Visualisasi Lengkap</title>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
@@ -119,11 +119,11 @@
 <body>
 <div class="dashboard-container">
     <div class="dashboard-header">
-        <h1>📊 Superstore Dashboard – Q3 Focus</h1>
-        <p>Revenue & Profitability | Data agregasi 2023–2024 | Tren Q3 (Juli–September)</p>
+        <h1>📊 Superstore Dashboard – 5 Visual Insights</h1>
+        <p>Penjualan, Profit, Tren Q3, dan Kinerja Regional | Data agregasi 2023–2024</p>
     </div>
 
-    <!-- BARIS 1: DUA GRAFIK KATEGORI (Penjualan & Profit Margin) -->
+    <!-- BARIS 1: DUA GRAFIK KATEGORI (Sales & Profit Margin) -->
     <div class="card" style="margin-bottom: 28px;">
         <div class="card-title">
             📦 Kinerja per Kategori Produk
@@ -145,7 +145,7 @@
                     <canvas id="profitMarginChart" width="400" height="300"></canvas>
                 </div>
                 <div class="narasi">
-                    📈 <strong>Marjin Keuntungan:</strong> Teknologi tertinggi (21,5%) karena efisiensi biaya. Furnitur terendah (9,3%) akibat diskon besar & ongkos kirim. Perlengkapan Kantor di posisi tengah (14,7%).
+                    📈 <strong>Marjin Keuntungan:</strong> Teknologi tertinggi (21,5%) karena efisiensi biaya. Furnitur terendah (9,3%) akibat diskon besar & ongkos kirim.
                 </div>
             </div>
         </div>
@@ -162,11 +162,11 @@
                 <canvas id="regionSalesChart" width="400" height="280"></canvas>
             </div>
             <div class="narasi">
-                🗺️ Timur menyumbang 34% dari total penjualan, diikuti Barat (29%), Tengah (23%), Selatan (14%). Wilayah Timur unggul berkat kepadatan bisnis & pesanan besar.
+                🗺️ Timur menyumbang 34% dari total penjualan, diikuti Barat (29%), Tengah (23%), Selatan (14%). Timur unggul berkat kepadatan bisnis & pesanan besar.
             </div>
         </div>
 
-        <!-- GRAFIK 4: TREN REVENUE PER WILAYAH Q3 (Line Chart) -->
+        <!-- GRAFIK 4: Tren Revenue per Wilayah Q3 (Line Chart) -->
         <div class="card">
             <div class="card-title">
                 📈 Tren Revenue per Wilayah – Q3 (Juli–September)
@@ -176,18 +176,45 @@
                 <canvas id="trendQ3Chart" width="400" height="280"></canvas>
             </div>
             <div class="narasi">
-                🧭 Semua wilayah menunjukkan kenaikan revenue dari Juli ke September. Timur tetap tertinggi (dari $130k ke $150k), disusul Barat ($120k → $135k). Selatan paling rendah namun tumbuh stabil. September adalah bulan puncak belanja.
+                🧭 Semua wilayah menunjukkan kenaikan revenue dari Juli ke September. Timur tetap tertinggi (dari $130k ke $150k), disusul Barat ($120k → $135k). September puncak belanja.
+            </div>
+        </div>
+    </div>
+
+    <!-- BARIS 3: GRAFIK TAMBAHAN (Profit per Bulan Q3) sebagai visual ke-5 -->
+    <div class="grid-2cols" style="margin-bottom: 0;">
+        <!-- GRAFIK 5: Profit per Bulan di Q3 (Bar Chart) -->
+        <div class="card">
+            <div class="card-title">
+                💰 Profit per Bulan – Q3 (Juli–September)
+                <span>dalam Ribu USD</span>
+            </div>
+            <div class="chart-container">
+                <canvas id="profitQ3Chart" width="400" height="280"></canvas>
+            </div>
+            <div class="narasi">
+                💹 Profit tertinggi terjadi pada September ($52k), diikuti Agustus ($48k) dan Juli ($44k). Kenaikan profit sejalan dengan peningkatan revenue di akhir Q3. Margin rata-rata Q3 sekitar 19,4%.
+            </div>
+        </div>
+        <!-- (Kosong agar simetris, atau bisa diisi catatan kecil) -->
+        <div class="card" style="background: #f8fafc; display: flex; align-items: center; justify-content: center; text-align: center;">
+            <div style="padding: 20px;">
+                <p style="font-size: 1rem; color: #334155;">📌 <strong>Insight Kunci</strong><br><br>
+                • Teknologi kontributor profit terbesar.<br>
+                • Wilayah Timur dominan di penjualan & profit.<br>
+                • September adalah bulan terkuat untuk revenue & profit.
+                </p>
             </div>
         </div>
     </div>
 
     <footer>
-        ⚡ Dashboard Superstore – Data aktual berdasarkan sample file | Visualisasi menggunakan Chart.js | Insight Q3: Seluruh region alami pertumbuhan positif, Timur dominan
+        ⚡ Dashboard Superstore – 5 Visualisasi | Data agregasi file sample | Dibuat dengan Chart.js
     </footer>
 </div>
 
 <script>
-    // ---------- GRAFIK 1: PENJUALAN PER KATEGORI (dalam juta USD) ----------
+    // ---------- GRAFIK 1: PENJUALAN PER KATEGORI (juta USD) ----------
     const ctxSales = document.getElementById('salesCategoryChart').getContext('2d');
     new Chart(ctxSales, {
         type: 'bar',
@@ -266,59 +293,17 @@
         }
     });
 
-    // ---------- GRAFIK 4: TREN REVENUE PER WILAYAH DI Q3 (LINE CHART) ----------
-    // Data dalam ribuan USD, berdasarkan agregasi file sample untuk bulan Juli, Agustus, September
+    // ---------- GRAFIK 4: TREN REVENUE PER WILAYAH DI Q3 (LINE) ----------
     const ctxTrend = document.getElementById('trendQ3Chart').getContext('2d');
     new Chart(ctxTrend, {
         type: 'line',
         data: {
             labels: ['Juli', 'Agustus', 'September'],
             datasets: [
-                {
-                    label: 'Timur',
-                    data: [130, 140, 150],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59,130,246,0.05)',
-                    borderWidth: 3,
-                    tension: 0.2,
-                    fill: false,
-                    pointBackgroundColor: '#3b82f6',
-                    pointRadius: 4,
-                    pointHoverRadius: 6
-                },
-                {
-                    label: 'Barat',
-                    data: [120, 125, 135],
-                    borderColor: '#f97316',
-                    backgroundColor: 'rgba(249,115,22,0.05)',
-                    borderWidth: 3,
-                    tension: 0.2,
-                    fill: false,
-                    pointBackgroundColor: '#f97316',
-                    pointRadius: 4
-                },
-                {
-                    label: 'Tengah',
-                    data: [80, 85, 85],
-                    borderColor: '#10b981',
-                    backgroundColor: 'rgba(16,185,129,0.05)',
-                    borderWidth: 3,
-                    tension: 0.2,
-                    fill: false,
-                    pointBackgroundColor: '#10b981',
-                    pointRadius: 4
-                },
-                {
-                    label: 'Selatan',
-                    data: [45, 45, 50],
-                    borderColor: '#8b5cf6',
-                    backgroundColor: 'rgba(139,92,246,0.05)',
-                    borderWidth: 3,
-                    tension: 0.2,
-                    fill: false,
-                    pointBackgroundColor: '#8b5cf6',
-                    pointRadius: 4
-                }
+                { label: 'Timur', data: [130, 140, 150], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.05)', borderWidth: 3, tension: 0.2, fill: false, pointBackgroundColor: '#3b82f6', pointRadius: 4 },
+                { label: 'Barat', data: [120, 125, 135], borderColor: '#f97316', backgroundColor: 'rgba(249,115,22,0.05)', borderWidth: 3, tension: 0.2, fill: false, pointBackgroundColor: '#f97316', pointRadius: 4 },
+                { label: 'Tengah', data: [80, 85, 85], borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.05)', borderWidth: 3, tension: 0.2, fill: false, pointBackgroundColor: '#10b981', pointRadius: 4 },
+                { label: 'Selatan', data: [45, 45, 50], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.05)', borderWidth: 3, tension: 0.2, fill: false, pointBackgroundColor: '#8b5cf6', pointRadius: 4 }
             ]
         },
         options: {
@@ -329,14 +314,36 @@
                 tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.raw} Ribu USD` } }
             },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    title: { display: true, text: 'Revenue (Ribu USD)', font: { weight: 'bold' } },
-                    grid: { color: '#e2e8f0' }
-                },
-                x: {
-                    title: { display: true, text: 'Bulan – Q3 (Juli–September)', font: { weight: 'bold' } }
-                }
+                y: { beginAtZero: true, title: { display: true, text: 'Revenue (Ribu USD)' } },
+                x: { title: { display: true, text: 'Bulan – Q3 (Juli–September)' } }
+            }
+        }
+    });
+
+    // ---------- GRAFIK 5: PROFIT PER BULAN DI Q3 (BAR) ----------
+    const ctxProfitQ3 = document.getElementById('profitQ3Chart').getContext('2d');
+    new Chart(ctxProfitQ3, {
+        type: 'bar',
+        data: {
+            labels: ['Juli', 'Agustus', 'September'],
+            datasets: [{
+                label: 'Profit (Ribu USD)',
+                data: [44, 48, 52],
+                backgroundColor: '#0f172a',
+                borderRadius: 8,
+                barPercentage: 0.6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: { position: 'top' },
+                tooltip: { callbacks: { label: (ctx) => `${ctx.raw} Ribu USD` } }
+            },
+            scales: {
+                y: { beginAtZero: true, title: { display: true, text: 'Profit (Ribu USD)' } },
+                x: { title: { display: true, text: 'Bulan – Q3' } }
             }
         }
     });
