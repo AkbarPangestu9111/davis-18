@@ -3,349 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Superstore Dashboard | 5 Visualisasi Lengkap</title>
-    <!-- Chart.js CDN -->
+    <title>Superstore | Mengapa Furniture Tidak Profitable?</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
         }
-
         body {
-            background: #f1f5f9;
-            padding: 30px 20px;
+            background: #f0f4f8;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            padding: 32px 24px;
+            color: #1e293b;
         }
-
-        .dashboard-container {
+        .dashboard {
             max-width: 1400px;
             margin: 0 auto;
         }
-
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: 40px;
+        .story-header {
+            background: white;
+            border-radius: 32px;
+            padding: 24px 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border-left: 8px solid #f97316;
         }
-
-        .dashboard-header h1 {
-            font-size: 2.2rem;
-            color: #0f172a;
-            font-weight: 700;
-            letter-spacing: -0.3px;
+        .story-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e3a8a, #b45309);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
         }
-
-        .dashboard-header p {
+        .subhead {
             color: #475569;
-            margin-top: 8px;
-            font-size: 1rem;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
         }
-
-        .grid-2cols {
+        .story-arc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+        .arc-item {
+            flex: 1;
+            background: #fff7ed;
+            padding: 10px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border-bottom: 2px solid #f97316;
+            text-align: center;
+        }
+        .arc-item strong {
+            color: #c2410c;
+            display: block;
+            font-size: 0.75rem;
+        }
+        .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 28px;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
-
         .card {
             background: white;
             border-radius: 28px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
-            padding: 20px 20px 25px 20px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            padding: 20px 24px 24px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+            transition: all 0.2s ease;
         }
-
         .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
         }
-
         .card-title {
             font-size: 1.3rem;
-            font-weight: 600;
-            color: #0f172a;
-            border-left: 5px solid #3b82f6;
-            padding-left: 15px;
-            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
         }
-
-        .card-title span {
-            font-size: 0.8rem;
-            font-weight: normal;
-            color: #64748b;
-            margin-left: 10px;
+        .badge {
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #1e40af;
         }
-
+        .sub {
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            margin-bottom: 16px;
+            border-left: 3px solid #f97316;
+            padding-left: 10px;
+        }
         .chart-container {
             position: relative;
-            height: 320px;
+            height: 280px;
             width: 100%;
-            margin-bottom: 16px;
+            margin: 12px 0;
         }
-
-        .narasi {
-            background: #f8fafc;
-            padding: 14px 18px;
+        .anotasi {
+            background: #fefce8;
+            padding: 10px 14px;
             border-radius: 20px;
-            font-size: 0.85rem;
-            color: #1e293b;
-            line-height: 1.5;
-            border-left: 3px solid #3b82f6;
-            margin-top: 10px;
+            font-size: 0.75rem;
+            border-left: 4px solid #f97316;
+            margin-top: 12px;
         }
-
+        .call-action {
+            background: #e6f7ec;
+            padding: 18px 24px;
+            border-radius: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .btn {
+            background: #0f3b2c;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background: #1f5e45;
+            transform: scale(1.02);
+        }
         footer {
             text-align: center;
             margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            font-size: 0.75rem;
-            color: #5b6e8c;
+            font-size: 0.7rem;
+            color: #6c86a3;
         }
-
         @media (max-width: 800px) {
-            .grid-2cols {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            .card-title {
-                font-size: 1.1rem;
-            }
+            .grid { grid-template-columns: 1fr; }
+            .story-arc { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-<div class="dashboard-container">
-    <div class="dashboard-header">
-        <h1>📊 Superstore Dashboard – 5 Visual Insights</h1>
-        <p>Penjualan, Profit, Tren Q3, dan Kinerja Regional | Data agregasi 2023–2024</p>
+<div class="dashboard">
+    <div class="story-header">
+        <h1>📉 Mengapa Furniture Tidak Pernah Cuan?</h1>
+        <div class="subhead">Revenue Furniture #2, tapi profit margin cuma 9,3% – jauh di bawah Teknologi (21,5%). Dashboard ini membongkar akar masalah.</div>
+        <div class="story-arc">
+            <div class="arc-item"><strong>🎣 HOOK</strong> Furniture revenue besar → profit kecil</div>
+            <div class="arc-item"><strong>📊 KONTEKS</strong> Perbandingan antar kategori</div>
+            <div class="arc-item"><strong>⚠️ TENSION</strong> Diskon Furniture tertinggi</div>
+            <div class="arc-item"><strong>🔥 CLIMAX</strong> Tables & Bookcases merugi</div>
+            <div class="arc-item"><strong>💡 INSIGHT</strong> Margin tergerus diskon & biaya</div>
+            <div class="arc-item"><strong>🎯 ACTION</strong> Batasi diskon Tables, evaluasi ongkir</div>
+        </div>
     </div>
 
-    <!-- BARIS 1: DUA GRAFIK KATEGORI (Sales & Profit Margin) -->
+    <!-- ROW 1: HOOK (Bar Chart) + KONTEKS (Pie Chart) -->
+    <div class="grid">
+        <div class="card">
+            <div class="card-title">💰 HOOK: Revenue per Kategori <span class="badge">Furniture #2</span></div>
+            <div class="sub">Total penjualan (Juta USD) → Furniture = $0,74M</div>
+            <div class="chart-container"><canvas id="chartRevenue"></canvas></div>
+            <div class="anotasi">🎣 Furniture menyumbang 29% dari total revenue. Tapi profit-nya sangat kecil. Mari kita lihat kontrasnya.</div>
+        </div>
+        <div class="card">
+            <div class="card-title">📊 KONTEKS: Profit Share <span class="badge">Furniture hanya 15%</span></div>
+            <div class="sub">Distribusi profit absolut antar kategori (Ribu USD)</div>
+            <div class="chart-container"><canvas id="chartProfitPie"></canvas></div>
+            <div class="anotasi">📌 Profit Furniture hanya $68K vs Teknologi $232K. Pangsa profit Furniture jauh di bawah kontribusi revenue-nya.</div>
+        </div>
+    </div>
+
+    <!-- ROW 2: TENSION (Line Chart Margin Trend + Bar Diskon) -->
+    <div class="grid">
+        <div class="card">
+            <div class="card-title">⚠️ TENSION: Tren Margin per Kuartal <span class="badge">Furniture selalu terendah</span></div>
+            <div class="sub">Profit Margin (%) per kategori – Q1 s.d Q4</div>
+            <div class="chart-container"><canvas id="chartMarginTrend"></canvas></div>
+            <div class="anotasi">🔻 Margin Furniture konsisten di bawah 10% sepanjang tahun, sementara Teknologi di atas 20%.</div>
+        </div>
+        <div class="card">
+            <div class="card-title">🏷️ TENSION: Rata-rata Diskon <span class="badge">Furniture tertinggi (22%)</span></div>
+            <div class="sub">Diskon rata-rata per kategori – sumber utama tekanan margin</div>
+            <div class="chart-container"><canvas id="chartDiscountHorizontal"></canvas></div>
+            <div class="anotasi">🔥 Furniture mendapat diskon 22%! Teknologi 15%, Kantor 12%. Diskon besar langsung menekan margin.</div>
+        </div>
+    </div>
+
+    <!-- ROW 3: CLIMAX (Stacked Bar: Revenue vs Profit sub-kategori Furniture) -->
     <div class="card" style="margin-bottom: 28px;">
-        <div class="card-title">
-            📦 Kinerja per Kategori Produk
-            <span>Total Sales vs Margin %</span>
+        <div class="card-title">🔥 CLIMAX: Breakdown Furniture – Revenue vs Profit <span class="badge">Tables & Bookcases rugi/impas</span></div>
+        <div class="sub">Revenue & Profit dalam Ribu USD – per sub-kategori Furniture</div>
+        <div class="chart-container" style="height: 320px;"><canvas id="chartFurStacked"></canvas></div>
+        <div class="anotasi">📊 Tables (revenue $210k) hanya menghasilkan profit $2,1k (margin 1%). Bookcases bahkan rugi -$3,2k. Chairs menyelamatkan profit Furniture.</div>
+    </div>
+
+    <!-- ROW 4: INSIGHT (Radar Chart: Efisiensi sub-kategori Furniture) -->
+    <div class="grid">
+        <div class="card">
+            <div class="card-title">💡 INSIGHT: Radar Efisiensi <span class="badge">Tables paling tidak efisien</span></div>
+            <div class="sub">Perbandingan: Diskon, Margin, dan Estimasi Biaya Kirim per sub-kategori (skala 0-100)</div>
+            <div class="chart-container" style="height: 300px;"><canvas id="chartRadar"></canvas></div>
+            <div class="anotasi">📡 Tables memiliki diskon tertinggi, margin terendah, dan biaya kirim paling besar. Bookcases juga bermasalah. Chairs paling efisien.</div>
         </div>
-        <div class="grid-2cols" style="margin-bottom: 0; gap: 20px;">
-            <!-- GRAFIK 1: Sales by Category -->
-            <div>
-                <div class="chart-container">
-                    <canvas id="salesCategoryChart" width="400" height="300"></canvas>
-                </div>
-                <div class="narasi">
-                    💵 <strong>Penjualan:</strong> Teknologi memimpin dengan $1,08M, disusul Perlengkapan Kantor ($0,97M) dan Furnitur ($0,74M). Teknologi unggul berkat produk elektronik bernilai tinggi.
-                </div>
-            </div>
-            <!-- GRAFIK 2: Profit Margin by Category -->
-            <div>
-                <div class="chart-container">
-                    <canvas id="profitMarginChart" width="400" height="300"></canvas>
-                </div>
-                <div class="narasi">
-                    📈 <strong>Marjin Keuntungan:</strong> Teknologi tertinggi (21,5%) karena efisiensi biaya. Furnitur terendah (9,3%) akibat diskon besar & ongkos kirim.
-                </div>
-            </div>
+        <div class="card">
+            <div class="card-title">💡 INSIGHT Lanjutan: Biaya per Unit <span class="badge">Tables & Bookcases boros</span></div>
+            <div class="sub">Estimasi biaya operasional per unit (USD) – produk bulky</div>
+            <div class="chart-container"><canvas id="chartCostBullet"></canvas></div>
+            <div class="anotasi">📦 Biaya pengiriman dan handling Tables mencapai $45/unit, jauh di atas rata-rata Furniture ($28). Inilah 'silent killer' profit.</div>
         </div>
     </div>
 
-    <!-- BARIS 2: DUA GRAFIK WILAYAH (Pie Sales & Tren Revenue Q3) -->
-    <div class="grid-2cols">
-        <!-- GRAFIK 3: Distribusi Penjualan per Wilayah (Pie) -->
-        <div class="card">
-            <div class="card-title">
-                🌎 Pangsa Penjualan per Wilayah
-            </div>
-            <div class="chart-container">
-                <canvas id="regionSalesChart" width="400" height="280"></canvas>
-            </div>
-            <div class="narasi">
-                🗺️ Timur menyumbang 34% dari total penjualan, diikuti Barat (29%), Tengah (23%), Selatan (14%). Timur unggul berkat kepadatan bisnis & pesanan besar.
-            </div>
-        </div>
-
-        <!-- GRAFIK 4: Tren Revenue per Wilayah Q3 (Line Chart) -->
-        <div class="card">
-            <div class="card-title">
-                📈 Tren Revenue per Wilayah – Q3 (Juli–September)
-                <span>dalam Ribu USD</span>
-            </div>
-            <div class="chart-container">
-                <canvas id="trendQ3Chart" width="400" height="280"></canvas>
-            </div>
-            <div class="narasi">
-                🧭 Semua wilayah menunjukkan kenaikan revenue dari Juli ke September. Timur tetap tertinggi (dari $130k ke $150k), disusul Barat ($120k → $135k). September puncak belanja.
-            </div>
-        </div>
+    <!-- CALL TO ACTION -->
+    <div class="call-action">
+        <div>🎯 <strong>ACTION PLAN untuk Tim Penjualan & Operasi:</strong><br>
+        • Batasi diskon Tables maksimal 10% (turun dari 22%)<br>
+        • Negosiasi ulang tarif pengiriman untuk Bookcases (produk bulky)<br>
+        • Bundle Chairs dengan Tables untuk meningkatkan margin<br>
+        • Fokus promosi Chairs karena profit margin-nya sehat</div>
+        <button class="btn" id="actionBtn">📋 Lihat Detail Action →</button>
     </div>
-
-    <!-- BARIS 3: GRAFIK TAMBAHAN (Profit per Bulan Q3) sebagai visual ke-5 -->
-    <div class="grid-2cols" style="margin-bottom: 0;">
-        <!-- GRAFIK 5: Profit per Bulan di Q3 (Bar Chart) -->
-        <div class="card">
-            <div class="card-title">
-                💰 Profit per Bulan – Q3 (Juli–September)
-                <span>dalam Ribu USD</span>
-            </div>
-            <div class="chart-container">
-                <canvas id="profitQ3Chart" width="400" height="280"></canvas>
-            </div>
-            <div class="narasi">
-                💹 Profit tertinggi terjadi pada September ($52k), diikuti Agustus ($48k) dan Juli ($44k). Kenaikan profit sejalan dengan peningkatan revenue di akhir Q3. Margin rata-rata Q3 sekitar 19,4%.
-            </div>
-        </div>
-        <!-- (Kosong agar simetris, atau bisa diisi catatan kecil) -->
-        <div class="card" style="background: #f8fafc; display: flex; align-items: center; justify-content: center; text-align: center;">
-            <div style="padding: 20px;">
-                <p style="font-size: 1rem; color: #334155;">📌 <strong>Insight Kunci</strong><br><br>
-                • Teknologi kontributor profit terbesar.<br>
-                • Wilayah Timur dominan di penjualan & profit.<br>
-                • September adalah bulan terkuat untuk revenue & profit.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        ⚡ Dashboard Superstore – 5 Visualisasi | Data agregasi file sample | Dibuat dengan Chart.js
-    </footer>
+    <footer>Dashboard untuk tim sales – Data Superstore 2023-2024 | Visualisasi beragam: Bar, Pie, Line, Horizontal Bar, Stacked Bar, Radar, Bullet Chart</footer>
 </div>
 
 <script>
-    // ---------- GRAFIK 1: PENJUALAN PER KATEGORI (juta USD) ----------
-    const ctxSales = document.getElementById('salesCategoryChart').getContext('2d');
-    new Chart(ctxSales, {
+    // CHART 1: Bar - Revenue per kategori (HOOK)
+    new Chart(document.getElementById('chartRevenue'), {
         type: 'bar',
-        data: {
-            labels: ['Teknologi', 'Perlengkapan Kantor', 'Furnitur'],
-            datasets: [{
-                label: 'Total Penjualan (juta USD)',
-                data: [1.08, 0.97, 0.74],
-                backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'],
-                borderRadius: 8,
-                barPercentage: 0.7
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: { position: 'top' },
-                tooltip: { callbacks: { label: (ctx) => `${ctx.raw} Juta USD` } }
-            },
-            scales: {
-                y: { beginAtZero: true, title: { display: true, text: 'Penjualan (juta USD)' } },
-                x: { title: { display: true, text: 'Kategori Produk' } }
-            }
-        }
+        data: { labels: ['Teknologi', 'Kantor', 'Furniture'], datasets: [{ label: 'Revenue (Juta USD)', data: [1.08, 0.97, 0.74], backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'], borderRadius: 8 }] },
+        options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, title: { display: true, text: 'Juta USD' } } } }
     });
 
-    // ---------- GRAFIK 2: PROFIT MARGIN PER KATEGORI (%) ----------
-    const ctxMargin = document.getElementById('profitMarginChart').getContext('2d');
-    new Chart(ctxMargin, {
-        type: 'bar',
-        data: {
-            labels: ['Teknologi', 'Perlengkapan Kantor', 'Furnitur'],
-            datasets: [{
-                label: 'Profit Margin (%)',
-                data: [21.5, 14.7, 9.3],
-                backgroundColor: ['#8b5cf6', '#14b8a6', '#f97316'],
-                borderRadius: 8,
-                barPercentage: 0.7
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: { position: 'top' },
-                tooltip: { callbacks: { label: (ctx) => `${ctx.raw}%` } }
-            },
-            scales: {
-                y: { beginAtZero: true, max: 28, title: { display: true, text: 'Margin (%)' }, ticks: { callback: (val) => val + '%' } },
-                x: { title: { display: true, text: 'Kategori' } }
-            }
-        }
-    });
-
-    // ---------- GRAFIK 3: DISTRIBUSI PENJUALAN PER WILAYAH (PIE) ----------
-    const ctxRegionPie = document.getElementById('regionSalesChart').getContext('2d');
-    new Chart(ctxRegionPie, {
+    // CHART 2: Pie - Profit Share (KONTEKS)
+    new Chart(document.getElementById('chartProfitPie'), {
         type: 'pie',
-        data: {
-            labels: ['Timur', 'Barat', 'Tengah', 'Selatan'],
-            datasets: [{
-                data: [34, 29, 23, 14],
-                backgroundColor: ['#3b82f6', '#f97316', '#10b981', '#8b5cf6'],
-                borderWidth: 0,
-                hoverOffset: 8
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: { position: 'right', labels: { font: { size: 12 } } },
-                tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw}% dari total penjualan` } }
-            }
-        }
+        data: { labels: ['Teknologi (232K)', 'Kantor (142K)', 'Furniture (68K)'], datasets: [{ data: [232, 142, 68], backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'], borderWidth: 0 }] },
+        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'right' }, tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw} Ribu USD` } } } }
     });
 
-    // ---------- GRAFIK 4: TREN REVENUE PER WILAYAH DI Q3 (LINE) ----------
-    const ctxTrend = document.getElementById('trendQ3Chart').getContext('2d');
-    new Chart(ctxTrend, {
+    // CHART 3: Line - Tren Margin per Kuartal (TENSION)
+    new Chart(document.getElementById('chartMarginTrend'), {
         type: 'line',
-        data: {
-            labels: ['Juli', 'Agustus', 'September'],
-            datasets: [
-                { label: 'Timur', data: [130, 140, 150], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.05)', borderWidth: 3, tension: 0.2, fill: false, pointBackgroundColor: '#3b82f6', pointRadius: 4 },
-                { label: 'Barat', data: [120, 125, 135], borderColor: '#f97316', backgroundColor: 'rgba(249,115,22,0.05)', borderWidth: 3, tension: 0.2, fill: false, pointBackgroundColor: '#f97316', pointRadius: 4 },
-                { label: 'Tengah', data: [80, 85, 85], borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.05)', borderWidth: 3, tension: 0.2, fill: false, pointBackgroundColor: '#10b981', pointRadius: 4 },
-                { label: 'Selatan', data: [45, 45, 50], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.05)', borderWidth: 3, tension: 0.2, fill: false, pointBackgroundColor: '#8b5cf6', pointRadius: 4 }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 10 } },
-                tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.raw} Ribu USD` } }
-            },
-            scales: {
-                y: { beginAtZero: true, title: { display: true, text: 'Revenue (Ribu USD)' } },
-                x: { title: { display: true, text: 'Bulan – Q3 (Juli–September)' } }
-            }
-        }
+        data: { labels: ['Q1', 'Q2', 'Q3', 'Q4'], datasets: [{ label: 'Teknologi', data: [21, 22, 21.5, 22], borderColor: '#3b82f6', tension: 0.2, fill: false }, { label: 'Kantor', data: [15, 14.5, 14, 15], borderColor: '#10b981', tension: 0.2, fill: false }, { label: 'Furniture', data: [9, 9.5, 9, 9.3], borderColor: '#f59e0b', tension: 0.2, fill: false }] },
+        options: { responsive: true, scales: { y: { beginAtZero: true, max: 25, ticks: { callback: v => v + '%' }, title: { display: true, text: 'Profit Margin (%)' } } } }
     });
 
-    // ---------- GRAFIK 5: PROFIT PER BULAN DI Q3 (BAR) ----------
-    const ctxProfitQ3 = document.getElementById('profitQ3Chart').getContext('2d');
-    new Chart(ctxProfitQ3, {
+    // CHART 4: Horizontal Bar - Diskon per kategori (TENSION)
+    new Chart(document.getElementById('chartDiscountHorizontal'), {
         type: 'bar',
-        data: {
-            labels: ['Juli', 'Agustus', 'September'],
-            datasets: [{
-                label: 'Profit (Ribu USD)',
-                data: [44, 48, 52],
-                backgroundColor: '#0f172a',
-                borderRadius: 8,
-                barPercentage: 0.6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: { position: 'top' },
-                tooltip: { callbacks: { label: (ctx) => `${ctx.raw} Ribu USD` } }
-            },
-            scales: {
-                y: { beginAtZero: true, title: { display: true, text: 'Profit (Ribu USD)' } },
-                x: { title: { display: true, text: 'Bulan – Q3' } }
-            }
-        }
+        data: { labels: ['Furniture', 'Teknologi', 'Kantor'], datasets: [{ label: 'Diskon rata-rata (%)', data: [22, 15, 12], backgroundColor: '#d97706', borderRadius: 8 }] },
+        options: { indexAxis: 'y', responsive: true, scales: { x: { beginAtZero: true, max: 30, ticks: { callback: v => v + '%' }, title: { display: true, text: 'Diskon (%)' } } } }
+    });
+
+    // CHART 5: Stacked Bar - Furniture sub-kategori Revenue vs Profit (CLIMAX)
+    new Chart(document.getElementById('chartFurStacked'), {
+        type: 'bar',
+        data: { labels: ['Chairs', 'Tables', 'Bookcases', 'Furnishings'], datasets: [{ label: 'Revenue (Ribu USD)', data: [320, 210, 110, 98], backgroundColor: '#3b82f6', borderRadius: 8 }, { label: 'Profit (Ribu USD)', data: [52, 2.1, -3.2, 17], backgroundColor: '#ef4444', borderRadius: 8 }] },
+        options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, title: { display: true, text: 'Ribu USD' } } }, plugins: { tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.raw} Ribu USD` } } } }
+    });
+
+    // CHART 6: Radar Chart - Efisiensi sub-kategori Furniture (INSIGHT)
+    new Chart(document.getElementById('chartRadar'), {
+        type: 'radar',
+        data: { labels: ['Diskon %', 'Margin %', 'Biaya Kirim/Unit', 'Return Rate'], datasets: [{ label: 'Chairs', data: [12, 16, 25, 3], borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.1)' }, { label: 'Tables', data: [22, 1, 45, 8], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.1)' }, { label: 'Bookcases', data: [18, -3, 38, 6], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)' }, { label: 'Furnishings', data: [15, 17, 20, 4], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.1)' }] },
+        options: { responsive: true, scales: { r: { beginAtZero: true, title: { display: true, text: 'Skala (rendah→tinggi)' } } } }
+    });
+
+    // CHART 7: Bullet-style bar untuk biaya per unit (INSIGHT lanjutan)
+    new Chart(document.getElementById('chartCostBullet'), {
+        type: 'bar',
+        data: { labels: ['Tables', 'Bookcases', 'Furnishings', 'Chairs'], datasets: [{ label: 'Estimasi Biaya Kirim & Handling per Unit (USD)', data: [45, 38, 20, 25], backgroundColor: '#d97706', borderRadius: 8 }] },
+        options: { responsive: true, scales: { y: { beginAtZero: true, title: { display: true, text: 'USD per Unit' } } }, plugins: { annotation: { annotations: { line1: { type: 'line', yMin: 28, yMax: 28, borderColor: 'red', borderWidth: 2 } } } } }
+    });
+
+    document.getElementById('actionBtn').addEventListener('click', () => {
+        alert("📋 ACTION PLAN DETAIL:\n1️⃣ Batasi diskon Tables maksimal 10% (turun dari 22%)\n2️⃣ Negosiasi ongkos kirim untuk Bookcases (produk bulky)\n3️⃣ Bundle Chairs + Tables dengan promo khusus\n4️⃣ Audit biaya pengiriman Furniture secara berkala\nTarget: tingkatkan profit Furniture minimal 40% dalam 2 kuartal.");
     });
 </script>
 </body>
